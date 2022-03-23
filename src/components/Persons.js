@@ -1,11 +1,16 @@
 import React from 'react'
+import personService from '../services/persons'
 
-const Persons = ({people}) => {
+const Persons = ({people, filter, handleRemove}) => {
+
     return (
         <ul>
-        {people.map(person => 
-          <li key={person.id}>{person.name} {person.number}</li>)}
-      </ul>
+          {people
+            .filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
+            .map(person => 
+            <li key={person.id} className='person'>{person.name} {person.number} <button onClick={() => handleRemove(person.id)}>delete</button></li>)
+          }
+        </ul>
     )
 }
 
